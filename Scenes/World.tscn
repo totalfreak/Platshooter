@@ -1,18 +1,17 @@
-[gd_scene load_steps=21 format=1]
+[gd_scene load_steps=20 format=1]
 
 [ext_resource path="res://Sprites/tile.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
-[ext_resource path="res://Sprites/lightMask.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/player.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/playerIdle1.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/playerIdle2.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/playerIdle3.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/playerIdle4.png" type="Texture" id=8]
-[ext_resource path="res://icon.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/crosshair.png" type="Texture" id=10]
-[ext_resource path="res://Scripts/crosshair.gd" type="Script" id=11]
-[ext_resource path="res://Prefabs/Torch.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Sprites/tileBlock.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/playerIdle1.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/playerIdle2.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/playerIdle3.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/playerIdle4.png" type="Texture" id=6]
+[ext_resource path="res://icon.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/crosshair.png" type="Texture" id=8]
+[ext_resource path="res://Scripts/crosshair.gd" type="Script" id=9]
+[ext_resource path="res://Prefabs/Torch.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Sprites/lightMask.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/tileBlock.png" type="Texture" id=12]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -22,13 +21,13 @@ radius = 10.0
 [sub_resource type="SpriteFrames" id=2]
 
 animations = [ {
-"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "Idle",
 "speed": 3.0
 } ]
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 
 resource/name = "Idle"
 length = 2.0
@@ -45,23 +44,23 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=4]
 
 custom_solver_bias = 0.0
 extents = Vector2( 16, 16 )
 
-[sub_resource type="OccluderPolygon2D" id=8]
+[sub_resource type="OccluderPolygon2D" id=5]
 
 closed = true
 cull_mode = 0
 polygon = Vector2Array( -15.8358, -13.2039, -13.2664, -15.8427, 13.1218, -15.9122, 15.969, -12.9956, 15.969, 12.6982, 12.9829, 15.8231, -12.7109, 15.962, -15.8358, 13.0454 )
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=6]
 
 custom_solver_bias = 0.0
 extents = Vector2( 29.5, 29.5 )
 
-[sub_resource type="OccluderPolygon2D" id=10]
+[sub_resource type="OccluderPolygon2D" id=7]
 
 closed = true
 cull_mode = 0
@@ -80,62 +79,53 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Player" type="KinematicBody2D" parent="."]
+[node name="Player" type="RigidBody2D" parent="."]
 
-editor/display_folded = true
 transform/pos = Vector2( 384, 392 )
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1.61477, 0, 3.523 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1.54501, -0.0660706, 2.66565 )
 shapes/0/trigger = false
+shapes/1/shape = SubResource( 1 )
+shapes/1/transform = Matrix32( 0.288565, 0, 0, 0.103407, -0.0212097, 18.4857 )
+shapes/1/trigger = false
 collision/layers = 1
 collision/mask = 1
-collision/margin = 0.08
+mode = 2
+mass = 1.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 2.0
+custom_integrator = false
+continuous_cd = 1
+contacts_reported = 2
+contact_monitor = true
+sleeping = false
+can_sleep = true
+velocity/linear = Vector2( 0, 0 )
+velocity/angular = 0.0
+damp_override/linear = -1.0
+damp_override/angular = -1.0
 script/script = ExtResource( 2 )
 
-[node name="Light2D" type="Light2D" parent="Player"]
+[node name="PlayerCollision" type="CollisionShape2D" parent="Player"]
 
-visibility/visible = false
-transform/scale = Vector2( 2.26872, 2.26872 )
-enabled = true
-editor_only = false
-texture = ExtResource( 3 )
-offset = Vector2( 0, 0 )
-scale = 0.2
-color = Color( 0.894531, 0.870808, 0.618484, 1 )
-energy = 0.5
-mode = 0
-range/height = 0.0
-range/z_min = -1024
-range/z_max = 1024
-range/layer_min = 0
-range/layer_max = 0
-range/item_mask = 1
-shadow/enabled = true
-shadow/color = Color( 0, 0, 0, 0 )
-shadow/buffer_size = 2048
-shadow/esm_multiplier = 80.0
-shadow/item_mask = 1
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Sprite" type="Sprite" parent="Player"]
-
-visibility/visible = false
-transform/scale = Vector2( 1.5, 1.5 )
-texture = ExtResource( 4 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-
-transform/pos = Vector2( 0, 3.523 )
-transform/scale = Vector2( 1, 1.61477 )
+transform/pos = Vector2( -0.0660706, 2.66565 )
+transform/scale = Vector2( 1, 1.54501 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="GroundCollision" type="CollisionShape2D" parent="Player"]
+
+transform/pos = Vector2( -0.0212097, 18.4857 )
+transform/scale = Vector2( 0.288565, 0.103407 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 1
 __meta__ = {
 "_edit_lock_": true
 }
@@ -176,7 +166,7 @@ __meta__ = {
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/Idle = SubResource( 5 )
+anims/Idle = SubResource( 3 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -187,15 +177,15 @@ autoplay = "Idle"
 ]]
 
 editor/display_folded = true
-transform/pos = Vector2( 583.827, 248 )
+transform/pos = Vector2( 599.169, 298.54 )
 input/pickable = true
-shapes/0/shape = SubResource( 6 )
+shapes/0/shape = SubResource( 4 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 3
 collision/mask = 1
 mode = 0
-mass = 4.0
+mass = 10.0
 friction = 1.0
 bounce = 0.0
 gravity_scale = 1.0
@@ -213,14 +203,14 @@ damp_override/angular = -1.0
 [node name="Sprite" type="Sprite" parent="Brick"]
 
 transform/scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 9 )
+texture = ExtResource( 7 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Brick"]
 
-shape = SubResource( 6 )
+shape = SubResource( 4 )
 trigger = false
 _update_shape_index = 0
 __meta__ = {
@@ -229,7 +219,7 @@ __meta__ = {
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Brick"]
 
-occluder = SubResource( 8 )
+occluder = SubResource( 5 )
 light_mask = 1
 __meta__ = {
 "_edit_lock_": true
@@ -239,27 +229,31 @@ __meta__ = {
 
 visibility/light_mask = 0
 transform/scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 10 )
-script/script = ExtResource( 11 )
+texture = ExtResource( 8 )
+script/script = ExtResource( 9 )
 
-[node name="Torch" parent="." instance=ExtResource( 12 )]
+[node name="Torch" parent="." instance=ExtResource( 10 )]
 
 transform/pos = Vector2( 404, 368.16 )
 
-[node name="Torch1" parent="." instance=ExtResource( 12 )]
+[node name="Torch1" parent="." instance=ExtResource( 10 )]
 
 transform/pos = Vector2( 554, 368.16 )
 
-[node name="Torch2" parent="." instance=ExtResource( 12 )]
+[node name="Torch2" parent="." instance=ExtResource( 10 )]
 
 transform/pos = Vector2( 704, 368.16 )
+
+[node name="Torch3" parent="." instance=ExtResource( 10 )]
+
+transform/pos = Vector2( 856, 368.16 )
 
 [node name="GlobalLight" type="Light2D" parent="."]
 
 transform/pos = Vector2( 0, -0.794434 )
 enabled = true
 editor_only = false
-texture = ExtResource( 3 )
+texture = ExtResource( 11 )
 offset = Vector2( 0, 0 )
 scale = 50.0
 color = Color( 0.574219, 0.574219, 0.574219, 1 )
@@ -284,9 +278,10 @@ __meta__ = {
 "ground",
 ]]
 
+editor/display_folded = true
 transform/pos = Vector2( 352, 456 )
 input/pickable = false
-shapes/0/shape = SubResource( 9 )
+shapes/0/shape = SubResource( 6 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 3
@@ -300,7 +295,7 @@ bounce = 0.0
 
 visibility/light_mask = 0
 transform/scale = Vector2( 3.6828, 3.6828 )
-texture = ExtResource( 13 )
+texture = ExtResource( 12 )
 region = true
 region_rect = Rect2( 0, 0, 16, 16 )
 __meta__ = {
@@ -309,7 +304,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
 
-shape = SubResource( 9 )
+shape = SubResource( 6 )
 trigger = false
 _update_shape_index = 0
 __meta__ = {
@@ -318,7 +313,7 @@ __meta__ = {
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Ground"]
 
-occluder = SubResource( 10 )
+occluder = SubResource( 7 )
 light_mask = 1
 __meta__ = {
 "_edit_lock_": true
@@ -328,9 +323,10 @@ __meta__ = {
 "ground",
 ]]
 
+editor/display_folded = true
 transform/pos = Vector2( 584, 456 )
 input/pickable = false
-shapes/0/shape = SubResource( 9 )
+shapes/0/shape = SubResource( 6 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 3
@@ -344,7 +340,7 @@ bounce = 0.0
 
 visibility/light_mask = 0
 transform/scale = Vector2( 3.6828, 3.6828 )
-texture = ExtResource( 13 )
+texture = ExtResource( 12 )
 region = true
 region_rect = Rect2( 0, 0, 16, 16 )
 __meta__ = {
@@ -353,7 +349,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground3 3"]
 
-shape = SubResource( 9 )
+shape = SubResource( 6 )
 trigger = false
 _update_shape_index = 0
 __meta__ = {
@@ -362,7 +358,7 @@ __meta__ = {
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Ground3 3"]
 
-occluder = SubResource( 10 )
+occluder = SubResource( 7 )
 light_mask = 1
 __meta__ = {
 "_edit_lock_": true
@@ -372,9 +368,10 @@ __meta__ = {
 "ground",
 ]]
 
+editor/display_folded = true
 transform/pos = Vector2( 468, 456 )
 input/pickable = false
-shapes/0/shape = SubResource( 9 )
+shapes/0/shape = SubResource( 6 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 3
@@ -388,7 +385,7 @@ bounce = 0.0
 
 visibility/light_mask = 0
 transform/scale = Vector2( 3.6828, 3.6828 )
-texture = ExtResource( 13 )
+texture = ExtResource( 12 )
 region = true
 region_rect = Rect2( 0, 0, 16, 16 )
 __meta__ = {
@@ -397,7 +394,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground2 2"]
 
-shape = SubResource( 9 )
+shape = SubResource( 6 )
 trigger = false
 _update_shape_index = 0
 __meta__ = {
@@ -406,7 +403,7 @@ __meta__ = {
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Ground2 2"]
 
-occluder = SubResource( 10 )
+occluder = SubResource( 7 )
 light_mask = 1
 __meta__ = {
 "_edit_lock_": true
@@ -416,9 +413,10 @@ __meta__ = {
 "ground",
 ]]
 
+editor/display_folded = true
 transform/pos = Vector2( 700, 456 )
 input/pickable = false
-shapes/0/shape = SubResource( 9 )
+shapes/0/shape = SubResource( 6 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 3
@@ -432,7 +430,7 @@ bounce = 0.0
 
 visibility/light_mask = 0
 transform/scale = Vector2( 3.6828, 3.6828 )
-texture = ExtResource( 13 )
+texture = ExtResource( 12 )
 region = true
 region_rect = Rect2( 0, 0, 16, 16 )
 __meta__ = {
@@ -441,7 +439,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground23"]
 
-shape = SubResource( 9 )
+shape = SubResource( 6 )
 trigger = false
 _update_shape_index = 0
 __meta__ = {
@@ -450,7 +448,7 @@ __meta__ = {
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Ground23"]
 
-occluder = SubResource( 10 )
+occluder = SubResource( 7 )
 light_mask = 1
 __meta__ = {
 "_edit_lock_": true
@@ -460,9 +458,10 @@ __meta__ = {
 "ground",
 ]]
 
+editor/display_folded = true
 transform/pos = Vector2( 410, 456 )
 input/pickable = false
-shapes/0/shape = SubResource( 9 )
+shapes/0/shape = SubResource( 6 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 3
@@ -476,7 +475,7 @@ bounce = 0.0
 
 visibility/light_mask = 0
 transform/scale = Vector2( 3.6828, 3.6828 )
-texture = ExtResource( 13 )
+texture = ExtResource( 12 )
 region = true
 region_rect = Rect2( 0, 0, 16, 16 )
 __meta__ = {
@@ -485,7 +484,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground1"]
 
-shape = SubResource( 9 )
+shape = SubResource( 6 )
 trigger = false
 _update_shape_index = 0
 __meta__ = {
@@ -494,7 +493,7 @@ __meta__ = {
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Ground1"]
 
-occluder = SubResource( 10 )
+occluder = SubResource( 7 )
 light_mask = 1
 __meta__ = {
 "_edit_lock_": true
@@ -504,9 +503,10 @@ __meta__ = {
 "ground",
 ]]
 
+editor/display_folded = true
 transform/pos = Vector2( 642, 456 )
 input/pickable = false
-shapes/0/shape = SubResource( 9 )
+shapes/0/shape = SubResource( 6 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 3
@@ -520,7 +520,7 @@ bounce = 0.0
 
 visibility/light_mask = 0
 transform/scale = Vector2( 3.6828, 3.6828 )
-texture = ExtResource( 13 )
+texture = ExtResource( 12 )
 region = true
 region_rect = Rect2( 0, 0, 16, 16 )
 __meta__ = {
@@ -529,7 +529,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground3"]
 
-shape = SubResource( 9 )
+shape = SubResource( 6 )
 trigger = false
 _update_shape_index = 0
 __meta__ = {
@@ -538,7 +538,7 @@ __meta__ = {
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Ground3"]
 
-occluder = SubResource( 10 )
+occluder = SubResource( 7 )
 light_mask = 1
 __meta__ = {
 "_edit_lock_": true
@@ -548,9 +548,10 @@ __meta__ = {
 "ground",
 ]]
 
+editor/display_folded = true
 transform/pos = Vector2( 526, 456 )
 input/pickable = false
-shapes/0/shape = SubResource( 9 )
+shapes/0/shape = SubResource( 6 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 3
@@ -564,7 +565,7 @@ bounce = 0.0
 
 visibility/light_mask = 0
 transform/scale = Vector2( 3.6828, 3.6828 )
-texture = ExtResource( 13 )
+texture = ExtResource( 12 )
 region = true
 region_rect = Rect2( 0, 0, 16, 16 )
 __meta__ = {
@@ -573,7 +574,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground2"]
 
-shape = SubResource( 9 )
+shape = SubResource( 6 )
 trigger = false
 _update_shape_index = 0
 __meta__ = {
@@ -582,7 +583,7 @@ __meta__ = {
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Ground2"]
 
-occluder = SubResource( 10 )
+occluder = SubResource( 7 )
 light_mask = 1
 __meta__ = {
 "_edit_lock_": true
@@ -592,9 +593,10 @@ __meta__ = {
 "ground",
 ]]
 
+editor/display_folded = true
 transform/pos = Vector2( 758, 456 )
 input/pickable = false
-shapes/0/shape = SubResource( 9 )
+shapes/0/shape = SubResource( 6 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 3
@@ -608,7 +610,7 @@ bounce = 0.0
 
 visibility/light_mask = 0
 transform/scale = Vector2( 3.6828, 3.6828 )
-texture = ExtResource( 13 )
+texture = ExtResource( 12 )
 region = true
 region_rect = Rect2( 0, 0, 16, 16 )
 __meta__ = {
@@ -617,7 +619,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground3 2"]
 
-shape = SubResource( 9 )
+shape = SubResource( 6 )
 trigger = false
 _update_shape_index = 0
 __meta__ = {
@@ -626,7 +628,98 @@ __meta__ = {
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Ground3 2"]
 
-occluder = SubResource( 10 )
+occluder = SubResource( 7 )
+light_mask = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Ground34" type="StaticBody2D" parent="." groups=[
+"ground",
+]]
+
+editor/display_folded = true
+transform/pos = Vector2( 876, 456 )
+input/pickable = false
+shapes/0/shape = SubResource( 6 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 3
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="Sprite" type="Sprite" parent="Ground34"]
+
+visibility/light_mask = 0
+transform/scale = Vector2( 3.6828, 3.6828 )
+texture = ExtResource( 12 )
+region = true
+region_rect = Rect2( 0, 0, 16, 16 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground34"]
+
+shape = SubResource( 6 )
+trigger = false
+_update_shape_index = 0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Ground34"]
+
+occluder = SubResource( 7 )
+light_mask = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Activator" type="StaticBody2D" parent="." groups=[
+"ground",
+"activator",
+]]
+
+editor/display_folded = true
+transform/pos = Vector2( 817, 463 )
+input/pickable = false
+shapes/0/shape = SubResource( 6 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 3
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="Sprite" type="Sprite" parent="Activator"]
+
+visibility/light_mask = 0
+transform/scale = Vector2( 3.6828, 3.6828 )
+texture = ExtResource( 12 )
+region = true
+region_rect = Rect2( 0, 0, 16, 16 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Activator"]
+
+shape = SubResource( 6 )
+trigger = false
+_update_shape_index = 0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Activator"]
+
+occluder = SubResource( 7 )
 light_mask = 1
 __meta__ = {
 "_edit_lock_": true

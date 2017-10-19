@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends RigidBody2D
 
 var left = "move_left"
 var right = "move_right"
@@ -9,11 +9,11 @@ var moving = false
 var grounded = false
 var movedLeft = false
 var hasShoot = false
-var shootSpeed = 800
+var shootSpeed = 600
 
 
-const GRAVITY = 300.0
-const MOVE_SPEED = 200
+const GRAVITY = 150
+const MOVE_SPEED = 100
 
 
 var velocity = Vector2()
@@ -25,46 +25,40 @@ func _ready():
 
 func _fixed_process(delta):
 	
+	var bodies = get_colliding_bodies()
 	
+	for body in bodies:
+		if body.get_pos().y > self.get_pos().y:
+			grounded = true
 	
-	
-	if(Input.is_action_pressed(up) and grounded):
-		velocity.y += delta * -10000
+	if Input.is_action_pressed("move_jump") and grounded:
+		set_linear_velocity(Vector2(get_linear_velocity().x, -GRAVITY))
 		grounded = false
 	
-	velocity.y += delta * GRAVITY
-	
 	if Input.is_action_pressed(left):
-		velocity.x = -MOVE_SPEED
+		set_linear_velocity(Vector2(-MOVE_SPEED, get_linear_velocity().y))
 		moving = true
 		movedLeft = true
 		get_node("AnimatedSprite").set_flip_h(true)
 	elif Input.is_action_pressed(right):
-		velocity.x = MOVE_SPEED
+		set_linear_velocity(Vector2(MOVE_SPEED, get_linear_velocity().y))
 		moving = true
 		movedLeft = false
 		get_node("AnimatedSprite").set_flip_h(false)
 	else:
-		velocity.x = 0
+		set_linear_velocity(Vector2(0, get_linear_velocity().y))
 		moving = false
 	
-	var motion = velocity * delta
-	motion = move(motion)
-	
-	if (is_colliding()):
-		var n = get_collision_normal()
-		#print(n.angle())
-		if(abs(n.angle()) > 2 and abs(n.angle()) < 4):
-			grounded = true
-		else:
-			grounded = false
-		motion = n.slide(motion)
-		velocity = n.slide(velocity)
-		move(motion)
+
+func set_ground():
+	pass
 
 func _input(event):
 	if event.type == InputEvent.MOUSE_BUTTON and !event.is_pressed() and event.button_index == BUTTON_LEFT:
 		shoot()
+	if event.type == InputEvent.KEY and event.is_pressed() and Input.is_action_pressed("move_jump"):
+		#jump()
+		pass
 
 
 func shoot():
