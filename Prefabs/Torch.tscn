@@ -1,0 +1,75 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://Sprites/torch.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/torch.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/lightMask.png" type="Texture" id=3]
+
+[sub_resource type="ColorRamp" id=1]
+
+offsets = FloatArray( 0, 0.274854, 1 )
+colors = ColorArray( 0.914062, 0.0392761, 0.0392761, 1, 0.902344, 0.591612, 0.260834, 1, 0.382812, 0.382812, 0.382812, 1 )
+
+[node name="Torch" type="Sprite"]
+
+visibility/light_mask = 0
+transform/pos = Vector2( 207.86, 77.7692 )
+z/z = -2
+texture = ExtResource( 1 )
+script/script = ExtResource( 2 )
+
+[node name="Flames" type="Particles2D" parent="."]
+
+visibility/opacity = 0.5
+visibility/behind_parent = true
+visibility/light_mask = 0
+config/amount = 64
+config/lifetime = 5.0
+config/process_mode = 1
+params/direction = 180.0
+params/spread = 10.0
+params/linear_velocity = 20.0
+params/spin_velocity = -1.0
+params/orbit_velocity = 0.19
+params/gravity_direction = 0.0
+params/gravity_strength = 0.0
+params/radial_accel = -5.0
+params/tangential_accel = 0.0
+params/damping = 0.0
+params/initial_angle = 0.0
+params/initial_size = 4.0
+params/final_size = 0.0
+params/hue_variation = 0.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+color/color = Color( 1, 1, 1, 0.404353 )
+color/color_ramp = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Light2D" type="Light2D" parent="."]
+
+enabled = true
+editor_only = false
+texture = ExtResource( 3 )
+offset = Vector2( 2, 1 )
+scale = 0.5
+color = Color( 1, 0.979401, 0.472656, 1 )
+energy = 0.9
+mode = 0
+range/height = 0.0
+range/z_min = -1024
+range/z_max = 1024
+range/layer_min = 0
+range/layer_max = 0
+range/item_mask = 1
+shadow/enabled = true
+shadow/color = Color( 0, 0, 0, 0 )
+shadow/buffer_size = 2048
+shadow/esm_multiplier = 80.0
+shadow/item_mask = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+
