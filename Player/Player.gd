@@ -10,6 +10,7 @@ var grounded = false
 var movedLeft = false
 var hasShoot = false
 var shootSpeed = 600
+var shouldDie = false
 
 
 const GRAVITY = 150
@@ -25,12 +26,17 @@ func _ready():
 
 func _fixed_process(delta):
 	
+	if Input.is_mouse_button_pressed(1):
+		shoot()
+	
 	var bodies = get_colliding_bodies()
+	
+	
 	
 	for body in bodies:
 		if body.get_pos().y > self.get_pos().y:
 			grounded = true
-	
+	"""
 	if Input.is_action_pressed("move_jump") and grounded:
 		set_linear_velocity(Vector2(get_linear_velocity().x, -GRAVITY))
 		grounded = false
@@ -46,16 +52,15 @@ func _fixed_process(delta):
 		movedLeft = false
 		get_node("AnimatedSprite").set_flip_h(false)
 	else:
-		set_linear_velocity(Vector2(0, get_linear_velocity().y))
+		if !Input.is_mouse_button_pressed(1):
+			set_linear_velocity(Vector2(0, get_linear_velocity().y))
 		moving = false
-	
+	"""
 
 func set_ground():
 	pass
 
 func _input(event):
-	if event.type == InputEvent.MOUSE_BUTTON and !event.is_pressed() and event.button_index == BUTTON_LEFT:
-		shoot()
 	if event.type == InputEvent.KEY and event.is_pressed() and Input.is_action_pressed("move_jump"):
 		#jump()
 		pass
@@ -73,3 +78,6 @@ func shoot():
 		bi.set_pos(get_pos()+Vector2(0, 0))
 	var rigidbody_vector = (get_global_mouse_pos() - self.get_pos()).normalized()
 	bi.apply_impulse(bi.get_pos(), rigidbody_vector*shootSpeed)
+	#print(rigidbody_vector)
+	self.apply_impulse(self.get_pos(), -rigidbody_vector*10)
+	#self.set_linear_velocity(Vector2(-rigidbody_vector.x*100, -rigidbody_vector.y*100))
