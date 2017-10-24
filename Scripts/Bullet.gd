@@ -9,7 +9,7 @@ func _ready():
 	#self is who respond to the callback
 	#_on_timer_timeout is the callback, can have any name
 	add_child(timer) #to process
-	timer.set_wait_time(2.0)
+	timer.set_wait_time(1.0)
 	timer.start() #to start
 	pass
 

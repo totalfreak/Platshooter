@@ -85,7 +85,6 @@ __meta__ = {
 
 [node name="Player" type="RigidBody2D" parent="."]
 
-editor/display_folded = true
 transform/pos = Vector2( 472, 392 )
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
@@ -140,7 +139,7 @@ __meta__ = {
 anchor_mode = 1
 rotating = false
 current = true
-zoom = Vector2( 0.4, 0.4 )
+zoom = Vector2( 0.25, 0.25 )
 limit/left = -10000000
 limit/top = -10000000
 limit/right = 10000000
