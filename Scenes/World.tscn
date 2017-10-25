@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=1]
+[gd_scene load_steps=20 format=1]
 
 [ext_resource path="res://Sprites/tile.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
@@ -9,9 +9,10 @@
 [ext_resource path="res://Prefabs/Brick.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Prefabs/Torch.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Sprites/lightMask.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/tileBlock.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/crosshair.png" type="Texture" id=11]
-[ext_resource path="res://Scripts/crosshair.gd" type="Script" id=12]
+[ext_resource path="res://Prefabs/Ground.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Sprites/tileBlock.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/crosshair.png" type="Texture" id=12]
+[ext_resource path="res://Scripts/crosshair.gd" type="Script" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -48,12 +49,12 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=5]
 
 custom_solver_bias = 0.0
 extents = Vector2( 29.5, 29.5 )
 
-[sub_resource type="OccluderPolygon2D" id=8]
+[sub_resource type="OccluderPolygon2D" id=6]
 
 closed = true
 cull_mode = 0
@@ -213,410 +214,21 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Ground" type="StaticBody2D" parent="." groups=[
-"ground",
-]]
+[node name="Ground" parent="." instance=ExtResource( 10 )]
 
-editor/display_folded = true
-transform/pos = Vector2( 352, 456 )
-input/pickable = false
-shapes/0/shape = SubResource( 7 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/0/trigger = false
-collision/layers = 3
-collision/mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
+transform/pos = Vector2( 345, 465 )
 
-[node name="Sprite" type="Sprite" parent="Ground"]
+[node name="Ground1" parent="." instance=ExtResource( 10 )]
 
-visibility/light_mask = 0
-transform/scale = Vector2( 3.6828, 3.6828 )
-texture = ExtResource( 10 )
-region = true
-region_rect = Rect2( 0, 0, 16, 16 )
-__meta__ = {
-"_edit_lock_": true
-}
+transform/pos = Vector2( 404, 465 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+[node name="Ground2" parent="." instance=ExtResource( 10 )]
 
-shape = SubResource( 7 )
-trigger = false
-_update_shape_index = 0
-__meta__ = {
-"_edit_lock_": true
-}
+transform/pos = Vector2( 463, 465 )
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Ground"]
+[node name="Ground3" parent="." instance=ExtResource( 10 )]
 
-occluder = SubResource( 8 )
-light_mask = 1
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Ground3 3" type="StaticBody2D" parent="." groups=[
-"ground",
-]]
-
-editor/display_folded = true
-transform/pos = Vector2( 584, 456 )
-input/pickable = false
-shapes/0/shape = SubResource( 7 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/0/trigger = false
-collision/layers = 3
-collision/mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-
-[node name="Sprite" type="Sprite" parent="Ground3 3"]
-
-visibility/light_mask = 0
-transform/scale = Vector2( 3.6828, 3.6828 )
-texture = ExtResource( 10 )
-region = true
-region_rect = Rect2( 0, 0, 16, 16 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground3 3"]
-
-shape = SubResource( 7 )
-trigger = false
-_update_shape_index = 0
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Ground3 3"]
-
-occluder = SubResource( 8 )
-light_mask = 1
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Ground2 2" type="StaticBody2D" parent="." groups=[
-"ground",
-]]
-
-editor/display_folded = true
-transform/pos = Vector2( 468, 456 )
-input/pickable = false
-shapes/0/shape = SubResource( 7 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/0/trigger = false
-collision/layers = 3
-collision/mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-
-[node name="Sprite" type="Sprite" parent="Ground2 2"]
-
-visibility/light_mask = 0
-transform/scale = Vector2( 3.6828, 3.6828 )
-texture = ExtResource( 10 )
-region = true
-region_rect = Rect2( 0, 0, 16, 16 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground2 2"]
-
-shape = SubResource( 7 )
-trigger = false
-_update_shape_index = 0
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Ground2 2"]
-
-occluder = SubResource( 8 )
-light_mask = 1
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Ground23" type="StaticBody2D" parent="." groups=[
-"ground",
-]]
-
-editor/display_folded = true
-transform/pos = Vector2( 700, 456 )
-input/pickable = false
-shapes/0/shape = SubResource( 7 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/0/trigger = false
-collision/layers = 3
-collision/mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-
-[node name="Sprite" type="Sprite" parent="Ground23"]
-
-visibility/light_mask = 0
-transform/scale = Vector2( 3.6828, 3.6828 )
-texture = ExtResource( 10 )
-region = true
-region_rect = Rect2( 0, 0, 16, 16 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground23"]
-
-shape = SubResource( 7 )
-trigger = false
-_update_shape_index = 0
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Ground23"]
-
-occluder = SubResource( 8 )
-light_mask = 1
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Ground1" type="StaticBody2D" parent="." groups=[
-"ground",
-]]
-
-editor/display_folded = true
-transform/pos = Vector2( 410, 456 )
-input/pickable = false
-shapes/0/shape = SubResource( 7 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/0/trigger = false
-collision/layers = 3
-collision/mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-
-[node name="Sprite" type="Sprite" parent="Ground1"]
-
-visibility/light_mask = 0
-transform/scale = Vector2( 3.6828, 3.6828 )
-texture = ExtResource( 10 )
-region = true
-region_rect = Rect2( 0, 0, 16, 16 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground1"]
-
-shape = SubResource( 7 )
-trigger = false
-_update_shape_index = 0
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Ground1"]
-
-occluder = SubResource( 8 )
-light_mask = 1
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Ground3" type="StaticBody2D" parent="." groups=[
-"ground",
-]]
-
-editor/display_folded = true
-transform/pos = Vector2( 642, 456 )
-input/pickable = false
-shapes/0/shape = SubResource( 7 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/0/trigger = false
-collision/layers = 3
-collision/mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-
-[node name="Sprite" type="Sprite" parent="Ground3"]
-
-visibility/light_mask = 0
-transform/scale = Vector2( 3.6828, 3.6828 )
-texture = ExtResource( 10 )
-region = true
-region_rect = Rect2( 0, 0, 16, 16 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground3"]
-
-shape = SubResource( 7 )
-trigger = false
-_update_shape_index = 0
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Ground3"]
-
-occluder = SubResource( 8 )
-light_mask = 1
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Ground2" type="StaticBody2D" parent="." groups=[
-"ground",
-]]
-
-editor/display_folded = true
-transform/pos = Vector2( 526, 456 )
-input/pickable = false
-shapes/0/shape = SubResource( 7 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/0/trigger = false
-collision/layers = 3
-collision/mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-
-[node name="Sprite" type="Sprite" parent="Ground2"]
-
-visibility/light_mask = 0
-transform/scale = Vector2( 3.6828, 3.6828 )
-texture = ExtResource( 10 )
-region = true
-region_rect = Rect2( 0, 0, 16, 16 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground2"]
-
-shape = SubResource( 7 )
-trigger = false
-_update_shape_index = 0
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Ground2"]
-
-occluder = SubResource( 8 )
-light_mask = 1
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Ground3 2" type="StaticBody2D" parent="." groups=[
-"ground",
-]]
-
-editor/display_folded = true
-transform/pos = Vector2( 758, 456 )
-input/pickable = false
-shapes/0/shape = SubResource( 7 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/0/trigger = false
-collision/layers = 3
-collision/mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-
-[node name="Sprite" type="Sprite" parent="Ground3 2"]
-
-visibility/light_mask = 0
-transform/scale = Vector2( 3.6828, 3.6828 )
-texture = ExtResource( 10 )
-region = true
-region_rect = Rect2( 0, 0, 16, 16 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground3 2"]
-
-shape = SubResource( 7 )
-trigger = false
-_update_shape_index = 0
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Ground3 2"]
-
-occluder = SubResource( 8 )
-light_mask = 1
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Ground34" type="StaticBody2D" parent="." groups=[
-"ground",
-]]
-
-editor/display_folded = true
-transform/pos = Vector2( 876, 456 )
-input/pickable = false
-shapes/0/shape = SubResource( 7 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/0/trigger = false
-collision/layers = 3
-collision/mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-
-[node name="Sprite" type="Sprite" parent="Ground34"]
-
-visibility/light_mask = 0
-transform/scale = Vector2( 3.6828, 3.6828 )
-texture = ExtResource( 10 )
-region = true
-region_rect = Rect2( 0, 0, 16, 16 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground34"]
-
-shape = SubResource( 7 )
-trigger = false
-_update_shape_index = 0
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Ground34"]
-
-occluder = SubResource( 8 )
-light_mask = 1
-__meta__ = {
-"_edit_lock_": true
-}
+transform/pos = Vector2( 522, 465 )
 
 [node name="Activator" type="StaticBody2D" parent="." groups=[
 "ground",
@@ -626,7 +238,7 @@ __meta__ = {
 editor/display_folded = true
 transform/pos = Vector2( 817, 463 )
 input/pickable = false
-shapes/0/shape = SubResource( 7 )
+shapes/0/shape = SubResource( 5 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 3
@@ -640,7 +252,7 @@ bounce = 0.0
 
 visibility/light_mask = 0
 transform/scale = Vector2( 3.6828, 3.6828 )
-texture = ExtResource( 10 )
+texture = ExtResource( 11 )
 region = true
 region_rect = Rect2( 0, 0, 16, 16 )
 __meta__ = {
@@ -649,7 +261,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Activator"]
 
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 trigger = false
 _update_shape_index = 0
 __meta__ = {
@@ -658,7 +270,7 @@ __meta__ = {
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Activator"]
 
-occluder = SubResource( 8 )
+occluder = SubResource( 6 )
 light_mask = 1
 __meta__ = {
 "_edit_lock_": true
@@ -668,7 +280,7 @@ __meta__ = {
 
 visibility/light_mask = 0
 transform/scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 11 )
-script/script = ExtResource( 12 )
+texture = ExtResource( 12 )
+script/script = ExtResource( 13 )
 
 
